@@ -4,7 +4,7 @@
     --text-color: #1a1a1a;
     --nav-color: #777777;
     --nav-hover: #000000;
-    --grid-gap: 20px;
+    --grid-gap: 3px;
     --header-padding: 60px 20px;
     
     /* Typography */
@@ -105,47 +105,80 @@ a {
     border-radius: 50%;
 }
 
-/* THEME TOGGLE */
-.theme-toggle {
+/* MOOD TOGGLE */
+.mood-toggle-wrapper {
     position: absolute;
     right: 20px;
     top: 5px;
-    background: none;
-    border: none;
-    color: var(--nav-color);
-    cursor: pointer;
-    font-size: 11px;
-    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mood-label {
+    font-size: 10px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     font-weight: 500;
-    transition: color 0.3s ease;
+    color: var(--nav-color);
 }
 
-.theme-toggle:hover {
-    color: var(--nav-hover);
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 22px;
 }
 
-/* DYNAMIC TOGGLE LABEL */
-.theme-label::before {
-    content: "DARK MODE";
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-[data-theme="dark"] .theme-label::before {
-    content: "LIGHT MODE";
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d1d1d1;
+    transition: .4s;
+    border-radius: 22px;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .theme-label::before {
-        content: "LIGHT MODE";
-    }
+[data-theme="dark"] .slider {
+    background-color: #555;
 }
 
-@media (prefers-color-scheme: light) {
-    :root:not([data-theme="dark"]) .theme-label::before {
-        content: "DARK MODE";
-    }
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
 }
 
+input:checked + .slider {
+    background-color: #333;
+}
+
+[data-theme="dark"] input:checked + .slider {
+    background-color: #e0e0e0;
+}
+
+[data-theme="dark"] .slider:before {
+    background-color: #121212;
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px);
+}
 
 /* GALLERIES (Instagram Style Grid) */
 .gallery-container {
@@ -232,7 +265,7 @@ a {
 /* RESPONSIVE */
 @media (max-width: 900px) {
     .ig-grid {
-        gap: 10px;
+        gap: 2px;
     }
 }
 
@@ -256,7 +289,7 @@ a {
     
     .ig-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 2px;
     }
 }
 
