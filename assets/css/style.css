@@ -278,7 +278,7 @@ input:checked + .slider:before {
         font-size: 22px;
     }
     
-    .theme-toggle {
+    .mood-toggle-wrapper {
         position: static;
         margin-top: -10px;
     }
