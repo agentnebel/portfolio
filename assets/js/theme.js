@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileBtn.addEventListener('click', () => {
             mobileBtn.classList.toggle('active');
             mainNav.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
         });
     }
 
