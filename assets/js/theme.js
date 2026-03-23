@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- THEME TOGGLE ---
     const toggleCheckbox = document.getElementById('theme-toggle-checkbox');
     const root = document.documentElement;
 
@@ -19,11 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', newTheme);
         });
     }
-});
 
-// --- CUSTOM CURSOR FOR IMAGES ---
-document.addEventListener('DOMContentLoaded', () => {
-    // Inject custom cursor
+    // --- MOBILE MENU ---
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const mainNav = document.querySelector('.main-nav');
+    if(mobileBtn && mainNav) {
+        mobileBtn.addEventListener('click', () => {
+            mobileBtn.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+    }
+
+    // --- CUSTOM CURSOR FOR IMAGES ---
     const cursor = document.createElement('div');
     cursor.classList.add('custom-cursor');
     document.body.appendChild(cursor);
@@ -38,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cursor.style.top = mouseY + 'px';
     });
 
-    // Detect hover on gallery images
     const images = document.querySelectorAll('.grid-item img');
     images.forEach(img => {
         img.addEventListener('mouseenter', () => {
@@ -48,7 +55,4 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('hovering-img');
         });
     });
-});
-
-
 });
