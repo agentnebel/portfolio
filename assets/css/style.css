@@ -1,32 +1,37 @@
 :root {
-    /* Light theme defaults (similar to user browser preference default if not set) */
-    --bg-color: #ffffff;
-    --text-color: #1a1a1a;
-    --nav-color: #777777;
+    --bg-color: #f4f1ea; /* Newspaper off-white */
+    --text-color: #111111;
+    --nav-color: #333333;
     --nav-hover: #000000;
-    --grid-gap: 3px;
-    --header-padding: 60px 20px;
+    --border-color: #111111;
+    --grid-gap: 20px;
+    --header-padding: 40px 20px 20px;
     
-    /* Typography */
     --font-primary: 'Rubik', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-newspaper: 'UnifrakturMaguntia', cursive;
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --nav-color: #888888;
+    --bg-color: #1a1a1a;
+    --text-color: #e4e0d7;
+    --nav-color: #aaaaaa;
     --nav-hover: #ffffff;
+    --border-color: #444444;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-color: #1a1a1a;
+        --text-color: #e4e0d7;
+        --nav-color: #aaaaaa;
+        --nav-hover: #ffffff;
+        --border-color: #444444;
+    }
 }
 
 /* Fallback: if no data-theme is set on root, use prefers-color-scheme */
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --bg-color: #121212;
-        --text-color: #e0e0e0;
-        --nav-color: #888888;
-        --nav-hover: #ffffff;
-    }
-}
+
 
 * { 
     margin: 0; 
@@ -56,54 +61,50 @@ a {
 }
 
 .header-inner {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
-    gap: 40px;
+    gap: 30px;
 }
 
 .logo {
-    font-size: 36px;
-    font-weight: 900;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
-    text-transform: uppercase;
+    font-family: var(--font-newspaper);
+    font-size: 64px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 1;
+    text-transform: none;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .main-nav {
+    width: 100%;
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
     justify-content: center;
+    border-top: 2px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 0;
 }
 
 .main-nav a {
-    font-size: 18px;
-    letter-spacing: -0.5px;
+    font-family: var(--font-primary);
+    font-size: 13px;
+    letter-spacing: 1px;
     color: var(--nav-color);
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
 }
 
 .main-nav a:hover, .main-nav a.active {
     color: var(--nav-hover);
-}
-
-.main-nav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background-color: var(--nav-hover);
-    border-radius: 50%;
 }
 
 /* MOOD TOGGLE */
@@ -181,40 +182,81 @@ input:checked + .slider:before {
     transform: translateX(16px);
 }
 
-/* MASONRY GALLERY (André D. Wagner Style) */
+/* ASYMMETRICAL EDITORIAL GRID */
 .gallery-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 40px 100px;
+    padding: 40px 40px 100px;
 }
 
 .masonry-gallery {
-    column-count: 3;
-    column-gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-flow: dense;
+    gap: var(--grid-gap);
 }
 
 .grid-item {
-    break-inside: avoid;
-    margin-bottom: 30px;
     position: relative;
     overflow: hidden;
-    background-color: #f9f9f9;
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
-[data-theme="dark"] .grid-item {
-    background-color: #1a1a1a;
-}
+/* The asymmetrical rhythm */
+.grid-item { grid-column: span 4; } /* Default */
+.grid-item:nth-child(3n+1) { grid-column: span 8; } /* Large feature every 3rd */
+.grid-item:nth-child(5n) { grid-column: span 6; } /* Medium feature */
 
 .grid-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    transition: opacity 0.4s ease;
+    filter: grayscale(100%) contrast(1.1);
+    transition: filter 0.5s ease, opacity 0.4s ease;
+    cursor: none; /* Hide default cursor for custom one */
 }
 
 .grid-item:hover img {
-    opacity: 0.9;
-}/* CONTACT PAGE */
+    filter: grayscale(0%) contrast(1);
+}
+
+/* Image captions (simulated newspaper captions) */
+.grid-item::after {
+    content: "Fig. " counter(gallery-counter) " — Captured on assignment.";
+    counter-increment: gallery-counter;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--nav-color);
+    margin-top: 10px;
+    display: block;
+}
+body { counter-reset: gallery-counter; }
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.15s ease-out;
+    mix-blend-mode: difference;
+    z-index: 9999;
+}
+body.hovering-img .custom-cursor {
+    transform: translate(-50%, -50%) scale(1);
+}
+/* CONTACT PAGE */
 .contact-container {
     max-width: 800px;
     margin: 0 auto;
@@ -223,11 +265,13 @@ input:checked + .slider:before {
 }
 
 .contact-content h2 {
+    font-family: var(--font-serif);
     font-size: 42px;
-    font-weight: 900;
+    font-weight: 400;
+    font-style: italic;
     margin-bottom: 20px;
-    letter-spacing: -1.5px;
-    line-height: 1.1;
+    letter-spacing: 0px;
+    line-height: 1.2;
 }
 
 .contact-content p {
@@ -263,13 +307,9 @@ input:checked + .slider:before {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-    .masonry-gallery {
-        column-count: 2;
-        column-gap: 20px;
-    }
-    .grid-item {
-        margin-bottom: 20px;
-    }
+    .grid-item { grid-column: span 6; }
+    .grid-item:nth-child(3n+1) { grid-column: span 12; }
+    .grid-item:nth-child(5n) { grid-column: span 12; }
 }
 
 @media (max-width: 768px) {
@@ -291,8 +331,9 @@ input:checked + .slider:before {
     }
     
     .masonry-gallery {
-        column-count: 2;
-        column-gap: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
     }
     .grid-item {
         margin-bottom: 15px;
