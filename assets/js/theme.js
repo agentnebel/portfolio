@@ -50,28 +50,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// --- DYNAMIC GRID FORMAT (Portrait/Landscape) ---
-document.addEventListener('DOMContentLoaded', () => {
-    const gridItems = document.querySelectorAll('.grid-item');
-    
-    gridItems.forEach(item => {
-        const img = item.querySelector('img');
-        if (!img) return;
 
-        const applyFormat = () => {
-            const ratio = img.naturalWidth / img.naturalHeight;
-            // Add classes based on the actual image aspect ratio
-            if (ratio > 1.1) {
-                item.classList.add('landscape');
-            } else {
-                item.classList.add('portrait');
-            }
-        };
-
-        if (img.complete) {
-            applyFormat();
-        } else {
-            img.addEventListener('load', applyFormat);
-        }
-    });
 });
