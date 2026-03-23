@@ -181,7 +181,7 @@ input:checked + .slider:before {
     transform: translateX(16px);
 }
 
-/* MASONRY GALLERY (André D. Wagner Style) */
+/* ASYMMETRICAL GALLERY GRID */
 .gallery-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -189,31 +189,45 @@ input:checked + .slider:before {
 }
 
 .masonry-gallery {
-    column-count: 3;
-    column-gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-flow: dense;
+    gap: 30px;
 }
 
 .grid-item {
-    break-inside: avoid;
-    margin-bottom: 30px;
     position: relative;
     overflow: hidden;
     background-color: #f9f9f9;
+    /* Basic aspect ratio to keep grid structured but dynamic */
+    aspect-ratio: 4 / 5;
 }
+
+/* The asymmetrical rhythm */
+.grid-item { grid-column: span 4; } /* Standard Portrait */
+.grid-item:nth-child(4n+1) { grid-column: span 8; aspect-ratio: 16 / 9; } /* Large Landscape */
+.grid-item:nth-child(5n) { grid-column: span 6; aspect-ratio: 1 / 1; } /* Medium Square */
+.grid-item:nth-child(7n) { grid-column: span 12; aspect-ratio: 21 / 9; } /* Full Width Panorama */
 
 [data-theme="dark"] .grid-item {
     background-color: #1a1a1a;
 }
 
+.grid-item picture, 
 .grid-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    transition: opacity 0.4s ease;
+}
+
+.grid-item img {
+    object-fit: cover;
+    transition: opacity 0.4s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .grid-item:hover img {
     opacity: 0.9;
+    transform: scale(1.03);
 }/* CONTACT PAGE */
 .contact-container {
     max-width: 800px;
@@ -263,13 +277,8 @@ input:checked + .slider:before {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-    .masonry-gallery {
-        column-count: 2;
-        column-gap: 20px;
-    }
-    .grid-item {
-        margin-bottom: 20px;
-    }
+    .grid-item { grid-column: span 6 !important; aspect-ratio: 4/5 !important; }
+    .grid-item:nth-child(3n+1) { grid-column: span 12 !important; aspect-ratio: 16/9 !important; }
 }
 
 @media (max-width: 768px) {
@@ -291,11 +300,12 @@ input:checked + .slider:before {
     }
     
     .masonry-gallery {
-        column-count: 2;
-        column-gap: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
     .grid-item {
-        margin-bottom: 15px;
+        aspect-ratio: auto !important;
     }
 }
 
@@ -304,10 +314,6 @@ input:checked + .slider:before {
         flex-direction: column;
         align-items: center;
         gap: 15px;
-    }
-    
-    .masonry-gallery {
-        column-count: 1;
     }
 }
 
