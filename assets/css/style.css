@@ -1,0 +1,273 @@
+:root {
+    /* Light theme defaults (similar to user browser preference default if not set) */
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+    --nav-color: #777777;
+    --nav-hover: #000000;
+    --grid-gap: 20px;
+    --header-padding: 60px 20px;
+    
+    /* Typography */
+    --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --nav-color: #888888;
+    --nav-hover: #ffffff;
+}
+
+/* Fallback: if no data-theme is set on root, use prefers-color-scheme */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --nav-color: #888888;
+        --nav-hover: #ffffff;
+    }
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a { 
+    text-decoration: none; 
+    color: inherit; 
+}
+
+/* HEADER & NAVIGATION */
+.site-header {
+    background-color: var(--bg-color);
+    padding: var(--header-padding);
+    transition: background-color 0.4s ease;
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 40px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.main-nav {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.main-nav a {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--nav-color);
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: var(--nav-hover);
+}
+
+.main-nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: var(--nav-hover);
+    border-radius: 50%;
+}
+
+/* THEME TOGGLE */
+.theme-toggle {
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    background: none;
+    border: none;
+    color: var(--nav-color);
+    cursor: pointer;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--nav-hover);
+}
+
+/* DYNAMIC TOGGLE LABEL */
+.theme-label::before {
+    content: "DARK MODE";
+}
+
+[data-theme="dark"] .theme-label::before {
+    content: "LIGHT MODE";
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .theme-label::before {
+        content: "LIGHT MODE";
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .theme-label::before {
+        content: "DARK MODE";
+    }
+}
+
+
+/* GALLERIES (Instagram Style Grid) */
+.gallery-container {
+    max-width: 1240px; /* 1200px + 20px padding left/right */
+    margin: 0 auto;
+    padding: 0 20px 80px;
+}
+
+.ig-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--grid-gap);
+}
+
+.grid-item {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #f0f0f0; /* placeholder loading color */
+    position: relative;
+}
+
+[data-theme="dark"] .grid-item {
+    background-color: #222;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.grid-item:hover img {
+    transform: scale(1.02);
+}
+
+/* CONTACT PAGE */
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px 100px;
+    text-align: center;
+}
+
+.contact-content h2 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.contact-content p {
+    color: var(--nav-color);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.email-link {
+    display: inline-block;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--text-color);
+    padding-bottom: 2px;
+}
+
+.social-links {
+    margin-top: 60px;
+}
+
+.social-links a {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--nav-color);
+}
+.social-links a:hover {
+    color: var(--nav-hover);
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .ig-grid {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        gap: 30px;
+    }
+    
+    .logo {
+        font-size: 22px;
+    }
+    
+    .theme-toggle {
+        position: static;
+        margin-top: -10px;
+    }
+    
+    .main-nav {
+        gap: 20px;
+    }
+    
+    .ig-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .ig-grid {
+        grid-template-columns: 1fr;
+    }
+}
