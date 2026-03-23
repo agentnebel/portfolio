@@ -1,0 +1,118 @@
+name: Convert Images to WebP
+
+on:
+  workflow_dispatch:
+    inputs:
+      quality:
+        description: 'Qualitätsstufe'
+        type: choice
+        options:
+          - lossless
+          - maximum
+          - high
+          - medium
+        default: 'maximum'
+        required: true
+
+env:
+  HERZ_MARKERS: "herz|favorit|fav|fav_|_hq|_hq_|_master|_print|_best|liebling"
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cwebp
+        run: sudo apt-get update && sudo apt-get install -y webp
+
+      - name: Check directory contents
+        run: |
+          echo "=== Inhalt von assets/img ==="
+          ls -la assets/img/ || echo "Verzeichnis nicht gefunden!"
+          echo "=== Verzeichnisstruktur ==="
+          find . -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" 2>/dev/null | head -20
+
+      - name: Convert to WebP
+        env:
+          QUALITY: ${{ github.event.inputs.quality }}
+        run: |
+          cd assets/img
+          
+          echo "Suche nach Bildern..."
+          
+          # Alle Bilddateien finden
+          find . -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | while read img_path; do
+            img=$(basename "$img_path")
+            webp="${img%.*}.webp"
+            
+            # Prüfen ob schon WebP existiert
+            if [ -f "$webp" ]; then
+              echo "⏭️  Überspringe (existiert): $webp"
+              continue
+            fi
+            
+            # Herzensbild prüfen
+            is_herz=0
+            filename_lower=$(echo "$img" | tr '[:upper:]' '[:lower:]')
+            IFS='|' read -ra MARKERS <<< "$HERZ_MARKERS"
+            for marker in "${MARKERS[@]}"; do
+              if [[ "$filename_lower" == *"$marker"* ]]; then
+                is_herz=1
+                break
+              fi
+            done
+            
+            if [ $is_herz -eq 1 ]; then
+              echo "💙 HERZENSBILD: $img"
+              mode="lossless"
+            else
+              mode="$QUALITY"
+            fi
+            
+            echo "🔄 Konvertiere: $img → $webp [$mode]"
+            
+            case "$mode" in
+              lossless)
+                cwebp -lossless -q 100 -exact -metadata all "$img" -o "$webp"
+                ;;
+              maximum)
+                cwebp -q 100 -sharp_yuv -sns 100 -pass 10 -af -mt -metadata all "$img" -o "$webp"
+                ;;
+              high)
+                cwebp -q 95 -sharp_yuv -sns 80 -pass 5 -metadata all "$img" -o "$webp"
+                ;;
+              medium)
+                cwebp -q 85 -sharp_yuv -metadata all "$img" -o "$webp"
+                ;;
+            esac
+            
+            if [ -f "$webp" ]; then
+              orig_size=$(stat -c%s "$img" 2>/dev/null)
+              webp_size=$(stat -c%s "$webp" 2>/dev/null)
+              if [ -n "$orig_size" ] && [ -n "$webp_size" ]; then
+                saved=$(( (orig_size - webp_size) * 100 / orig_size ))
+                echo "   💾 ${saved}% kleiner"
+              fi
+            fi
+          done
+          
+          echo "✅ Fertig!"
+          ls -la *.webp 2>/dev/null || echo "Keine WebP-Dateien erstellt"
+
+      - name: Commit and push WebP files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add assets/img/*.webp
+          
+          if git diff --cached --quiet; then
+            echo "Keine neuen WebP-Dateien zum Commit"
+            exit 0
+          fi
+          
+          git commit -m "Add converted WebP images [skip ci]"
+          git push

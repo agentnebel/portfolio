@@ -199,15 +199,15 @@ input:checked + .slider:before {
     position: relative;
     overflow: hidden;
     background-color: #f9f9f9;
-    /* Basic aspect ratio to keep grid structured but dynamic */
-    aspect-ratio: 4 / 5;
+    /* Strict 2:3 and 3:2 formats */
+    aspect-ratio: 2 / 3;
+    grid-column: span 4;
 }
 
-/* The asymmetrical rhythm */
-.grid-item { grid-column: span 4; } /* Standard Portrait */
-.grid-item:nth-child(4n+1) { grid-column: span 8; aspect-ratio: 16 / 9; } /* Large Landscape */
-.grid-item:nth-child(5n) { grid-column: span 6; aspect-ratio: 1 / 1; } /* Medium Square */
-.grid-item:nth-child(7n) { grid-column: span 12; aspect-ratio: 21 / 9; } /* Full Width Panorama */
+/* The asymmetrical rhythm (Strictly 2:3 Portrait and 3:2 Landscape) */
+.grid-item:nth-child(5n+1) { grid-column: span 8; aspect-ratio: 3 / 2; } /* Large Landscape */
+.grid-item:nth-child(7n) { grid-column: span 6; aspect-ratio: 2 / 3; } /* Large Portrait */
+.grid-item:nth-child(8n+2) { grid-column: span 12; aspect-ratio: 3 / 2; } /* Full Width Landscape */
 
 [data-theme="dark"] .grid-item {
     background-color: #1a1a1a;
@@ -277,7 +277,9 @@ input:checked + .slider:before {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-    .grid-item { grid-column: span 6 !important; aspect-ratio: 4/5 !important; }
+    .grid-item { grid-column: span 6 !important; aspect-ratio: 2 / 3 !important; }
+    .grid-item:nth-child(3n+1) { grid-column: span 12 !important; aspect-ratio: 3 / 2 !important; }
+}
     .grid-item:nth-child(3n+1) { grid-column: span 12 !important; aspect-ratio: 16/9 !important; }
 }
 
