@@ -94,17 +94,7 @@ a {
     color: var(--nav-hover);
 }
 
-.main-nav a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 4px;
-    background-color: var(--nav-hover);
-    border-radius: 50%;
-}
+
 
 /* MOOD TOGGLE */
 .mood-toggle-wrapper {
@@ -127,6 +117,8 @@ a {
 
 .switch {
     position: relative;
+    border: none;
+    outline: none;
     display: inline-block;
     width: 38px;
     height: 22px;
@@ -313,7 +305,9 @@ input:checked + .slider:before {
     .mobile-menu-btn {
         display: block !important;
         background: transparent;
-        
+        border: none;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
         cursor: pointer;
         padding: 10px;
         margin-left: -10px; /* Offset padding */
@@ -338,6 +332,8 @@ input:checked + .slider:before {
         background-color: var(--text-color);
         transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease;
         transform-origin: center;
+        border: none;
+        outline: none;
     }
 
     .top-bun {
@@ -389,7 +385,8 @@ input:checked + .slider:before {
         transform: translateY(-10px); /* Smooth slight drop */
         transition: opacity 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.5s;
         z-index: 1001; /* Behind header elements, above everything else */
-        
+        border: none;
+        outline: none;
     }
     
     .main-nav.active {
