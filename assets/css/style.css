@@ -8,7 +8,7 @@
     --header-padding: 60px 20px;
     
     /* Typography */
-    --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-primary: 'Rubik', sans-serif;
 }
 
 [data-theme="dark"] {
