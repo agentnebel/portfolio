@@ -110,10 +110,11 @@ a {
 .mood-toggle-wrapper {
     position: absolute;
     right: 20px;
-    top: 5px;
+    top: 25px;
     display: flex;
     align-items: center;
     gap: 12px;
+    z-index: 100;
 }
 
 .mood-label {
