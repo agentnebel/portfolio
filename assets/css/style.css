@@ -9,7 +9,7 @@
     
     /* Typography */
     --font-primary: 'Space Mono', monospace;
-    --font-display: 'Syne', sans-serif;
+    --font-display: 'Archivo Black', sans-serif;
 }
 
 [data-theme="dark"] {
@@ -70,9 +70,9 @@ a {
 
 .logo {
     font-family: var(--font-display);
-    font-size: 48px;
-    font-weight: 800;
-    letter-spacing: -1.5px;
+    font-size: 52px;
+    font-weight: 400;
+    letter-spacing: -2.5px;
     line-height: 1.1;
     text-transform: uppercase;
 }
@@ -294,7 +294,8 @@ input:checked + .slider:before {
     }
     
     .logo {
-        font-size: 32px;
+        font-size: 36px;
+        letter-spacing: -2px;
         z-index: 1002;
         margin-top: 5px;
         position: relative; /* ensure it stays above menu */
