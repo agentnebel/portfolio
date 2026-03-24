@@ -403,10 +403,6 @@ input:checked + .slider:before {
     body.menu-open {
         overflow: hidden;
     }
-    body {
-        background-color: transparent;
-    }
-
 }
 
 /* Custom Cursor */
