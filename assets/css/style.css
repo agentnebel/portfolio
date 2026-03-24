@@ -269,11 +269,11 @@ input:checked + .slider:before {
 
 @media (max-width: 768px) {
     .masonry-gallery {
-        column-count: 1;
-        column-gap: 0;
+        column-count: 2;
+        column-gap: 3vw;
     }
     .grid-item {
-        margin-bottom: 20px;
+        margin-bottom: 3vw;
     }
 }
 
