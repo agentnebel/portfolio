@@ -264,7 +264,6 @@ input:checked + .slider:before {
     .masonry-gallery {
         column-count: 2;
     }
-}
     .grid-item:nth-child(3n+1) { grid-column: span 12 !important; aspect-ratio: 16/9 !important; }
 }
 
@@ -276,9 +275,6 @@ input:checked + .slider:before {
     .grid-item {
         margin-bottom: 20px;
     }
-}
-
-
 }
 
 /* MOBILE MENU BURGER (SQUARESPACE STYLE 2-LINES) */
