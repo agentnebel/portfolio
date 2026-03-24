@@ -80,6 +80,7 @@ a {
     gap: 40px;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
 
 .main-nav a {
@@ -100,13 +101,10 @@ a {
 
 /* MOOD TOGGLE */
 .mood-toggle-wrapper {
-    position: absolute;
-    right: 20px;
-    top: 25px;
     display: flex;
     align-items: center;
     gap: 12px;
-    z-index: 100;
+    margin-left: 20px;
 }
 
 .mood-label {
@@ -353,15 +351,14 @@ input:checked + .slider:before {
     
     /* Adjust right side (toggle) */
     .mood-toggle-wrapper {
-        position: relative;
-        right: auto;
-        top: auto;
-        margin-top: 0;
-        z-index: 1002;
+        margin-top: 20px;
+        margin-left: 0;
     }
     
     .mood-label {
-        display: none;
+        display: block;
+        color: var(--text-color);
+        font-size: 18px;
     }
     
     /* Fullscreen Overlay */
