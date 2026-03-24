@@ -34,8 +34,10 @@
     box-sizing: border-box; 
 }
 
-body {
+html, body {
     background-color: var(--bg-color);
+}
+body {
     color: var(--text-color);
     font-family: var(--font-primary);
     transition: background-color 0.4s ease, color 0.4s ease;
