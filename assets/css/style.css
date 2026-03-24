@@ -68,7 +68,7 @@ a {
 }
 
 .logo {
-    font-size: 36px;
+    font-size: 48px;
     font-weight: 900;
     letter-spacing: -1.5px;
     line-height: 1.1;
@@ -292,7 +292,7 @@ input:checked + .slider:before {
     }
     
     .logo {
-        font-size: 24px;
+        font-size: 32px;
         z-index: 1002;
         margin-top: 5px;
         position: relative; /* ensure it stays above menu */
