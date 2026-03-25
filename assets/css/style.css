@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
 :root {
     /* Light theme defaults (similar to user browser preference default if not set) */
     --bg-color: #ffffff;
@@ -86,11 +88,12 @@ a {
 }
 
 .main-nav a {
-    font-size: 16px;
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
     letter-spacing: 1px;
     color: var(--nav-color);
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 400;
     transition: color 0.3s ease;
     position: relative;
 }
