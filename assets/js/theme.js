@@ -25,10 +25,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const mainNav = document.querySelector('.main-nav');
     if(mobileBtn && mainNav) {
+        const setMenuState = (isOpen) => {
+            mobileBtn.classList.toggle('active', isOpen);
+            mainNav.classList.toggle('active', isOpen);
+            document.body.classList.toggle('menu-open', isOpen);
+            mobileBtn.setAttribute('aria-expanded', String(isOpen));
+        };
+
         mobileBtn.addEventListener('click', () => {
-            mobileBtn.classList.toggle('active');
-            mainNav.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
+            const isOpen = !mainNav.classList.contains('active');
+            setMenuState(isOpen);
+        });
+
+        mainNav.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                setMenuState(false);
+            });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setMenuState(false);
+            }
         });
     }
 

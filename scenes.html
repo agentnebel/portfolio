@@ -6,7 +6,7 @@
     <title>Sven Belz | Street</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Archivo+Black&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script>
         const savedTheme = localStorage.getItem('theme');
@@ -19,13 +19,13 @@
     <header class="site-header">
         <div class="header-inner">
             <a href="index.html" class="logo">SVEN BELZ</a>
-            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="main-nav">
                 <span class="burger-inner">
                     <span class="top-bun"></span>
                     <span class="bottom-bun"></span>
                 </span>
             </button>
-            <nav class="main-nav">
+            <nav class="main-nav" id="main-nav">
                 <a href="index.html">FACES</a>
                 <a href="scenes.html" class="active">SCENES</a>
                 <a href="journeys.html">JOURNEYS</a>
@@ -47,38 +47,32 @@
         <div class="masonry-gallery">
             <div class="grid-item">
                 <picture>
-                    <source srcset="assets/img/placeholder.webp" type="image/webp">
-                    <img src="https://images.unsplash.com/photo-1493608759325-1bd79fbb6dc0?q=80&w=800&auto=format&fit=crop" alt="Street Photography" loading="lazy" decoding="async">
+                    <img src="https://images.unsplash.com/photo-1493608759325-1bd79fbb6dc0?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Street Photography" loading="lazy" decoding="async">
                 </picture>
             </div>
             <div class="grid-item">
                 <picture>
-                    <source srcset="assets/img/placeholder.webp" type="image/webp">
-                    <img src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?q=80&w=800&auto=format&fit=crop" alt="Street Photography" loading="lazy" decoding="async">
+                    <img src="https://images.unsplash.com/photo-1518098268026-4e89f1a2cd8e?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Street Photography" loading="lazy" decoding="async">
                 </picture>
             </div>
             <div class="grid-item">
                 <picture>
-                    <source srcset="assets/img/placeholder.webp" type="image/webp">
-                    <img src="https://images.unsplash.com/photo-1518155981440-ce5995574c8c?q=80&w=800&auto=format&fit=crop" alt="Street Photography" loading="lazy" decoding="async">
+                    <img src="https://images.unsplash.com/photo-1518155981440-ce5995574c8c?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Street Photography" loading="lazy" decoding="async">
                 </picture>
             </div>
             <div class="grid-item">
                 <picture>
-                    <source srcset="assets/img/placeholder.webp" type="image/webp">
-                    <img src="https://images.unsplash.com/photo-1542459020-0490b8f3ca05?q=80&w=800&auto=format&fit=crop" alt="Street Photography" loading="lazy" decoding="async">
+                    <img src="https://images.unsplash.com/photo-1542459020-0490b8f3ca05?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Street Photography" loading="lazy" decoding="async">
                 </picture>
             </div>
             <div class="grid-item">
                 <picture>
-                    <source srcset="assets/img/placeholder.webp" type="image/webp">
-                    <img src="https://images.unsplash.com/photo-1512411516087-3498b8c54db0?q=80&w=800&auto=format&fit=crop" alt="Street Photography" loading="lazy" decoding="async">
+                    <img src="https://images.unsplash.com/photo-1512411516087-3498b8c54db0?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Street Photography" loading="lazy" decoding="async">
                 </picture>
             </div>
             <div class="grid-item">
                 <picture>
-                    <source srcset="assets/img/placeholder.webp" type="image/webp">
-                    <img src="https://images.unsplash.com/photo-1515902120468-1af9dc43a0ff?q=80&w=800&auto=format&fit=crop" alt="Street Photography" loading="lazy" decoding="async">
+                    <img src="https://images.unsplash.com/photo-1515902120468-1af9dc43a0ff?q=80&amp;w=800&amp;auto=format&amp;fit=crop" alt="Street Photography" loading="lazy" decoding="async">
                 </picture>
             </div>
         </div>

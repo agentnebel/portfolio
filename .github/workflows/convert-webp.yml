@@ -39,6 +39,7 @@ jobs:
         env:
           QUALITY: ${{ github.event.inputs.quality }}
         run: |
+          mkdir -p assets/img
           cd assets/img
           
           echo "Suche nach Bildern..."
@@ -106,8 +107,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add assets/img/*.webp
+
+          find assets/img -maxdepth 1 -type f -name "*.webp" -print0 | xargs -0r git add
           
           if git diff --cached --quiet; then
             echo "Keine neuen WebP-Dateien zum Commit"

@@ -6,7 +6,7 @@
     <title>Sven Belz | Contact</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&amp;family=Archivo+Black&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script>
         const savedTheme = localStorage.getItem('theme');
@@ -19,13 +19,13 @@
     <header class="site-header">
         <div class="header-inner">
             <a href="index.html" class="logo">SVEN BELZ</a>
-            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="main-nav">
                 <span class="burger-inner">
                     <span class="top-bun"></span>
                     <span class="bottom-bun"></span>
                 </span>
             </button>
-            <nav class="main-nav">
+            <nav class="main-nav" id="main-nav">
                 <a href="index.html">FACES</a>
                 <a href="scenes.html">SCENES</a>
                 <a href="journeys.html">JOURNEYS</a>
@@ -51,7 +51,7 @@
             <a href="mailto:hello@svenbelz.com" class="email-link">hello@svenbelz.com</a>
             
             <div class="social-links">
-                <a href="#" target="_blank">Instagram</a>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
             </div>
         </div>
     </main>
